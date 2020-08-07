@@ -1,25 +1,16 @@
-
 import discord
 
-TOKEN = 'NzQxMzIwNjIwNzA4NDYyNjkz.Xy12oQ.LJFyvr9ZkaAWFJACldPnEGGBaIA'
+class MyClient(discord.Client):
+    async def on_ready(self):
+        print('Logged on as', self.user)
 
-client = discord.Client()
+    async def on_message(self, message):
+        # don't respond to ourselves
+        if message.author == self.user:
+            return
 
-@client.event
-async def on_message(message):
-    # we do not want the bot to reply to itself
-    if message.author == client.user:
-        return
+        if message.content == 'ping':
+            await message.channel.send('pong')
 
-    if message.content.startswith('!hello'):
-        msg = 'Hello {0.author.mention}'.format(message)
-        await client.send_message(message.channel, msg)
-
-@client.event
-async def on_ready():
-    print('Logged in as')
-    print(client.user.name)
-    print(client.user.id)
-    print('------')
-
-client.run(TOKEN)
+client = MyClient()
+client.run('NzQxMzIwNjIwNzA4NDYyNjkz.Xy12oQ.DfVvVvZjBhy-5Lkz48tHXUKVqxU')
