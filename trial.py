@@ -1,4 +1,3 @@
-asdasdasdasd
 import discord
 
 TOKEN = 'NzQxMzIwNjIwNzA4NDYyNjkz.Xy12oQ.LJFyvr9ZkaAWFJACldPnEGGBaIA'
