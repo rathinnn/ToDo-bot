@@ -63,7 +63,6 @@ async def checktime(ctx):
         elif(difference<=2 ):
             await ctx.send(li.content+' :  in '+str(difference)+'  days')
 
-
 @client.command()
 async def delete(ctx):
     i=1
@@ -126,8 +125,7 @@ async def modify(ctx):
         tmessage=await ctx.send('{}   {}   {}'.format(subject_of_assignment,assignment_name,date_time_string))
         await tmessage.pin()
     except:
-        return await ctx.send('Invalid Format ')
-
+        return await ctx.send('Invalid Format')
 
 @client.command()
 async def help(ctx):
