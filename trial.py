@@ -3,23 +3,13 @@ from discord.ext import commands,tasks
 from datetime import datetime
 import asyncio
 
-tempcode='''from datetime import datetime
-message = "biology;assignment 1;21-12-2021;18:14:33"
-message.replace(" ", "")
-message_array = message.split(";")
-subject_of_assignment = message_array[0].strip();
-assignment_name = message_array[1].strip()
-date_time_string = message_array[2].strip() + " " + message_array[3].strip()
-date_time = datetime.strptime(date_time_string, "%d-%m-%Y %H:%M:%S")
-print("subject:" + subject_of_assignment)
-print("Assignment_name:" + assignment_name)
-print(date_time)
-biology;assignment 1;21-12-2021;18:14:33
-biology;assignment 1;21-12-2021;18:14:33
-biology ;assignment 1;21-12-2021;18:14:33'''
-
 client = commands.Bot(command_prefix="!!")
 client.remove_command("help")
+
+@client.event
+async def on_ready():
+    tocheck.start()
+    print('Online')
 
 @client.command()
 async def add(ctx, arg1):
@@ -58,11 +48,11 @@ async def checktime(ctx):
         date_time = datetime.strptime(date_time_string, "%d-%m-%Y %H:%M:%S")
         now=datetime.now()
         difference=date_time-now
-        difference=difference.days
+        differenced=difference.days
         if(date_time<=now):
             await li.unpin()
-        elif(difference<=2 ):
-            await ctx.send(li.content+' :  in '+str(difference)+'  days')
+        elif(differenced<=2 ):
+            await ctx.send(li.content+' :  in '+str(difference))
 
 @client.command()
 async def delete(ctx):
@@ -136,5 +126,25 @@ async def help(ctx):
     await ctx.send('"!!modify" - used to modify the time of a particular entry and also the next command would be to choose the number of the entry to modify and you need to just enter the date and time in the following format [dd-mm-yy;hh:mm:ss]')
     await ctx.send('"!!checktime" - prints the list of assignments which are to be submitted in two days in the list')
     await ctx.send('"!!display" - prints all the entries of assignments in the list')
+
+@tasks.loop(seconds=120)
+async def tocheck():
+    thechannel=client.get_channel(740610956677349496)
+    list2=await thechannel.pins()
+    await thechannel.send('Assignments with Deadlines approaching')
+    for li in list2:
+        message=li.content
+        message_array = message.split()
+        subject_of_assignment = message_array[0].strip();
+        assignment_name = message_array[1].strip()
+        date_time_string = message_array[2].strip() + " " + message_array[3].strip()
+        date_time = datetime.strptime(date_time_string, "%d-%m-%Y %H:%M:%S")
+        now=datetime.now()
+        difference=date_time-now
+        differenced=difference.days
+        if(date_time<=now):
+            await li.unpin()
+        elif(differenced<=2 ):
+            await thechannel.send(li.content+' :  in '+str(difference))
 
 client.run('NzQxMzIwNjIwNzA4NDYyNjkz.Xy12oQ.DfVvVvZjBhy-5Lkz48tHXUKVqxU')
