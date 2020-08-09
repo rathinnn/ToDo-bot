@@ -19,6 +19,7 @@ biology;assignment 1;21-12-2021;18:14:33
 biology ;assignment 1;21-12-2021;18:14:33'''
 
 client = commands.Bot(command_prefix="!!")
+client.remove_command("help")
 
 @client.command()
 async def add(ctx, arg1):
