@@ -131,7 +131,6 @@ async def modify(ctx):
 
 @client.command()
 async def help(ctx):
-    list2=await ctx.pins()
     await ctx.send('"!!help" - prints the list of commands for the bot')
     await ctx.send('"!!add [subject];[assignment or exam and its number];[dd-mm-yyyy];[hh:mm:ss in 24 houurs clock format]" - use this format in order to add a entry to the assignment list')
     await ctx.send('"!!delete" - used to delete a entry in the assignment list and also the next command would be to choose the number of the entry to delete and you need to just enter the number of the entry to delete')
