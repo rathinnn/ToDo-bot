@@ -147,4 +147,4 @@ async def tocheck():
         elif(differenced<=2 ):
             await thechannel.send(li.content+' :  in '+str(difference))
 
-client.run('NzQxMzIwNjIwNzA4NDYyNjkz.Xy12oQ.DfVvVvZjBhy-5Lkz48tHXUKVqxU')
+client.run('Access Token Here')
